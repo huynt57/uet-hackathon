@@ -27,7 +27,13 @@ class UserController extends Controller {
     }
 
     public function login() {
-        
+        $attr = StringHelper::filterArrayString($_POST);
+        $data = User::model()->login($attr);
+        if ($data) {
+            ResponseHelper::JsonReturnSuccess($data, 'success');
+        } else {
+            ResponseHelper::JsonReturnError('', 'server error');
+        }
     }
 
     // Uncomment the following methods and override them if needed
