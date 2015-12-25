@@ -7,7 +7,7 @@
  * property or method in class "User".
  *
  * Columns in table "user" available as properties of the model,
- * followed by relations of table "user" available as properties of the model.
+ * and there are no model relations.
  *
  * @property integer $userid
  * @property string $user
@@ -22,18 +22,8 @@
  * @property string $career
  * @property integer $location_id
  * @property integer $chatting_id
+ * @property string $email
  *
- * @property Comment[] $comments
- * @property Follow[] $follows
- * @property Follow[] $follows1
- * @property Friends[] $friends
- * @property Friends[] $friends1
- * @property Notification[] $notifications
- * @property Post[] $posts
- * @property Post[] $posts1
- * @property Location $location
- * @property Chatting $chatting
- * @property Subject[] $subjects
  */
 abstract class BaseUser extends GxActiveRecord {
 
@@ -55,33 +45,21 @@ abstract class BaseUser extends GxActiveRecord {
 
 	public function rules() {
 		return array(
-			array('userid, user, password, first_name, last_name, date, address, avatar, cover, phone, career, location_id, chatting_id', 'required'),
+			array('userid', 'required'),
 			array('userid, date, location_id, chatting_id', 'numerical', 'integerOnly'=>true),
-			array('user, password, first_name, last_name, address, avatar, cover, phone, career', 'length', 'max'=>255),
-			array('userid, user, password, first_name, last_name, date, address, avatar, cover, phone, career, location_id, chatting_id', 'safe', 'on'=>'search'),
+			array('user, password, first_name, last_name, address, avatar, cover, phone, career, email', 'length', 'max'=>255),
+			array('user, password, first_name, last_name, date, address, avatar, cover, phone, career, location_id, chatting_id, email', 'default', 'setOnEmpty' => true, 'value' => null),
+			array('userid, user, password, first_name, last_name, date, address, avatar, cover, phone, career, location_id, chatting_id, email', 'safe', 'on'=>'search'),
 		);
 	}
 
 	public function relations() {
 		return array(
-			'comments' => array(self::HAS_MANY, 'Comment', 'user_comment_id'),
-			'follows' => array(self::HAS_MANY, 'Follow', 'user_id_follow'),
-			'follows1' => array(self::HAS_MANY, 'Follow', 'user_id_followed'),
-			'friends' => array(self::HAS_MANY, 'Friends', 'user_id_1'),
-			'friends1' => array(self::HAS_MANY, 'Friends', 'user_id_2'),
-			'notifications' => array(self::HAS_MANY, 'Notification', 'user_id'),
-			'posts' => array(self::HAS_MANY, 'Post', 'user_id'),
-			'posts1' => array(self::MANY_MANY, 'Post', 'post_like(user_id, post_id)'),
-			'location' => array(self::BELONGS_TO, 'Location', 'location_id'),
-			'chatting' => array(self::BELONGS_TO, 'Chatting', 'chatting_id'),
-			'subjects' => array(self::MANY_MANY, 'Subject', 'user_subject(user_id, subject_id)'),
 		);
 	}
 
 	public function pivotModels() {
 		return array(
-			'posts1' => 'PostLike',
-			'subjects' => 'UserSubject',
 		);
 	}
 
@@ -98,19 +76,9 @@ abstract class BaseUser extends GxActiveRecord {
 			'cover' => Yii::t('app', 'Cover'),
 			'phone' => Yii::t('app', 'Phone'),
 			'career' => Yii::t('app', 'Career'),
-			'location_id' => null,
-			'chatting_id' => null,
-			'comments' => null,
-			'follows' => null,
-			'follows1' => null,
-			'friends' => null,
-			'friends1' => null,
-			'notifications' => null,
-			'posts' => null,
-			'posts1' => null,
-			'location' => null,
-			'chatting' => null,
-			'subjects' => null,
+			'location_id' => Yii::t('app', 'Location'),
+			'chatting_id' => Yii::t('app', 'Chatting'),
+			'email' => Yii::t('app', 'Email'),
 		);
 	}
 
@@ -130,6 +98,7 @@ abstract class BaseUser extends GxActiveRecord {
 		$criteria->compare('career', $this->career, true);
 		$criteria->compare('location_id', $this->location_id);
 		$criteria->compare('chatting_id', $this->chatting_id);
+		$criteria->compare('email', $this->email, true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria' => $criteria,

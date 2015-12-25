@@ -10,7 +10,7 @@ class UserController extends Controller {
         //$attr = StringHelper::filterArrayString($_POST);
     }
 
-    public function register() {
+    public function actionRegister() {
         $attr = StringHelper::filterArrayString($_POST);
         $result = User::model()->register($attr);
         switch ($result) {
@@ -26,7 +26,7 @@ class UserController extends Controller {
         }
     }
 
-    public function login() {
+    public function actionLogin() {
         $attr = StringHelper::filterArrayString($_POST);
         $data = User::model()->login($attr);
         if ($data) {

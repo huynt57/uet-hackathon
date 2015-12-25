@@ -56,8 +56,8 @@ abstract class BaseUserSubject extends GxActiveRecord {
 
 	public function attributeLabels() {
 		return array(
-			'user_id' => null,
-			'subject_id' => null,
+			'user_id' => Yii::t('app', 'User'),
+			'subject_id' => Yii::t('app', 'Subject'),
 			'year' => Yii::t('app', 'Year'),
 			'like' => Yii::t('app', 'Like'),
 		);

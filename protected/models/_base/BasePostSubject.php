@@ -54,8 +54,8 @@ abstract class BasePostSubject extends GxActiveRecord {
 
 	public function attributeLabels() {
 		return array(
-			'post_id' => null,
-			'subject_id' => null,
+			'post_id' => Yii::t('app', 'Post'),
+			'subject_id' => Yii::t('app', 'Subject'),
 		);
 	}
 

@@ -7,15 +7,13 @@
  * property or method in class "Friends".
  *
  * Columns in table "friends" available as properties of the model,
- * followed by relations of table "friends" available as properties of the model.
+ * and there are no model relations.
  *
  * @property integer $friend_id
  * @property integer $user_id_2
  * @property integer $user_id_1
  * @property integer $date
  *
- * @property User $userId1
- * @property User $userId2
  */
 abstract class BaseFriends extends GxActiveRecord {
 
@@ -45,8 +43,6 @@ abstract class BaseFriends extends GxActiveRecord {
 
 	public function relations() {
 		return array(
-			'userId1' => array(self::BELONGS_TO, 'User', 'user_id_1'),
-			'userId2' => array(self::BELONGS_TO, 'User', 'user_id_2'),
 		);
 	}
 
@@ -58,11 +54,9 @@ abstract class BaseFriends extends GxActiveRecord {
 	public function attributeLabels() {
 		return array(
 			'friend_id' => Yii::t('app', 'Friend'),
-			'user_id_2' => null,
-			'user_id_1' => null,
+			'user_id_2' => Yii::t('app', 'User Id 2'),
+			'user_id_1' => Yii::t('app', 'User Id 1'),
 			'date' => Yii::t('app', 'Date'),
-			'userId1' => null,
-			'userId2' => null,
 		);
 	}
 

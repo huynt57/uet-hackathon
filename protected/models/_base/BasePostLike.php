@@ -54,8 +54,8 @@ abstract class BasePostLike extends GxActiveRecord {
 
 	public function attributeLabels() {
 		return array(
-			'post_id' => null,
-			'user_id' => null,
+			'post_id' => Yii::t('app', 'Post'),
+			'user_id' => Yii::t('app', 'User'),
 		);
 	}
 

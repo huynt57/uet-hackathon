@@ -7,15 +7,13 @@
  * property or method in class "Follow".
  *
  * Columns in table "follow" available as properties of the model,
- * followed by relations of table "follow" available as properties of the model.
+ * and there are no model relations.
  *
  * @property string $follow_id
  * @property integer $user_id_follow
  * @property integer $user_id_followed
  * @property integer $date
  *
- * @property User $userIdFollow
- * @property User $userIdFollowed
  */
 abstract class BaseFollow extends GxActiveRecord {
 
@@ -46,8 +44,6 @@ abstract class BaseFollow extends GxActiveRecord {
 
 	public function relations() {
 		return array(
-			'userIdFollow' => array(self::BELONGS_TO, 'User', 'user_id_follow'),
-			'userIdFollowed' => array(self::BELONGS_TO, 'User', 'user_id_followed'),
 		);
 	}
 
@@ -59,11 +55,9 @@ abstract class BaseFollow extends GxActiveRecord {
 	public function attributeLabels() {
 		return array(
 			'follow_id' => Yii::t('app', 'Follow'),
-			'user_id_follow' => null,
-			'user_id_followed' => null,
+			'user_id_follow' => Yii::t('app', 'User Id Follow'),
+			'user_id_followed' => Yii::t('app', 'User Id Followed'),
 			'date' => Yii::t('app', 'Date'),
-			'userIdFollow' => null,
-			'userIdFollowed' => null,
 		);
 	}
 

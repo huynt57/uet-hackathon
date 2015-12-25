@@ -7,15 +7,13 @@
  * property or method in class "Location".
  *
  * Columns in table "location" available as properties of the model,
- * followed by relations of table "location" available as properties of the model.
+ * and there are no model relations.
  *
  * @property integer $location_id
  * @property string $name
  * @property double $latitude
  * @property double $longitude
  *
- * @property Post[] $posts
- * @property User[] $users
  */
 abstract class BaseLocation extends GxActiveRecord {
 
@@ -47,8 +45,6 @@ abstract class BaseLocation extends GxActiveRecord {
 
 	public function relations() {
 		return array(
-			'posts' => array(self::HAS_MANY, 'Post', 'location_id'),
-			'users' => array(self::HAS_MANY, 'User', 'location_id'),
 		);
 	}
 
@@ -63,8 +59,6 @@ abstract class BaseLocation extends GxActiveRecord {
 			'name' => Yii::t('app', 'Name'),
 			'latitude' => Yii::t('app', 'Latitude'),
 			'longitude' => Yii::t('app', 'Longitude'),
-			'posts' => null,
-			'users' => null,
 		);
 	}
 

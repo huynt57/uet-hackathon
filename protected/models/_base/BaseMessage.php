@@ -7,7 +7,7 @@
  * property or method in class "Message".
  *
  * Columns in table "message" available as properties of the model,
- * followed by relations of table "message" available as properties of the model.
+ * and there are no model relations.
  *
  * @property integer $message_id
  * @property integer $chatting_id
@@ -15,7 +15,6 @@
  * @property string $content
  * @property integer $date
  *
- * @property Chatting $chatting
  */
 abstract class BaseMessage extends GxActiveRecord {
 
@@ -45,7 +44,6 @@ abstract class BaseMessage extends GxActiveRecord {
 
 	public function relations() {
 		return array(
-			'chatting' => array(self::BELONGS_TO, 'Chatting', 'chatting_id'),
 		);
 	}
 
@@ -57,11 +55,10 @@ abstract class BaseMessage extends GxActiveRecord {
 	public function attributeLabels() {
 		return array(
 			'message_id' => Yii::t('app', 'Message'),
-			'chatting_id' => null,
+			'chatting_id' => Yii::t('app', 'Chatting'),
 			'user' => Yii::t('app', 'User'),
 			'content' => Yii::t('app', 'Content'),
 			'date' => Yii::t('app', 'Date'),
-			'chatting' => null,
 		);
 	}
 

@@ -7,7 +7,7 @@
  * property or method in class "Notification".
  *
  * Columns in table "notification" available as properties of the model,
- * followed by relations of table "notification" available as properties of the model.
+ * and there are no model relations.
  *
  * @property integer $notification_id
  * @property integer $user_id
@@ -16,7 +16,6 @@
  * @property string $content
  * @property integer $date
  *
- * @property User $user
  */
 abstract class BaseNotification extends GxActiveRecord {
 
@@ -46,7 +45,6 @@ abstract class BaseNotification extends GxActiveRecord {
 
 	public function relations() {
 		return array(
-			'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 		);
 	}
 
@@ -58,12 +56,11 @@ abstract class BaseNotification extends GxActiveRecord {
 	public function attributeLabels() {
 		return array(
 			'notification_id' => Yii::t('app', 'Notification'),
-			'user_id' => null,
+			'user_id' => Yii::t('app', 'User'),
 			'type' => Yii::t('app', 'Type'),
 			'isSee' => Yii::t('app', 'Is See'),
 			'content' => Yii::t('app', 'Content'),
 			'date' => Yii::t('app', 'Date'),
-			'user' => null,
 		);
 	}
 

@@ -7,7 +7,7 @@
  * property or method in class "Comment".
  *
  * Columns in table "comment" available as properties of the model,
- * followed by relations of table "comment" available as properties of the model.
+ * and there are no model relations.
  *
  * @property integer $comment_id
  * @property integer $post_id
@@ -15,8 +15,6 @@
  * @property string $content
  * @property integer $date
  *
- * @property Post $post
- * @property User $userComment
  */
 abstract class BaseComment extends GxActiveRecord {
 
@@ -46,8 +44,6 @@ abstract class BaseComment extends GxActiveRecord {
 
 	public function relations() {
 		return array(
-			'post' => array(self::BELONGS_TO, 'Post', 'post_id'),
-			'userComment' => array(self::BELONGS_TO, 'User', 'user_comment_id'),
 		);
 	}
 
@@ -59,12 +55,10 @@ abstract class BaseComment extends GxActiveRecord {
 	public function attributeLabels() {
 		return array(
 			'comment_id' => Yii::t('app', 'Comment'),
-			'post_id' => null,
-			'user_comment_id' => null,
+			'post_id' => Yii::t('app', 'Post'),
+			'user_comment_id' => Yii::t('app', 'User Comment'),
 			'content' => Yii::t('app', 'Content'),
 			'date' => Yii::t('app', 'Date'),
-			'post' => null,
-			'userComment' => null,
 		);
 	}
 

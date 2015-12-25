@@ -7,13 +7,12 @@
  * property or method in class "SubjectGroup".
  *
  * Columns in table "subject_group" available as properties of the model,
- * followed by relations of table "subject_group" available as properties of the model.
+ * and there are no model relations.
  *
  * @property integer $subject_group_id
  * @property string $name
  * @property string $description
  *
- * @property Subject[] $subjects
  */
 abstract class BaseSubjectGroup extends GxActiveRecord {
 
@@ -44,7 +43,6 @@ abstract class BaseSubjectGroup extends GxActiveRecord {
 
 	public function relations() {
 		return array(
-			'subjects' => array(self::HAS_MANY, 'Subject', 'subject_group_id'),
 		);
 	}
 
@@ -58,7 +56,6 @@ abstract class BaseSubjectGroup extends GxActiveRecord {
 			'subject_group_id' => Yii::t('app', 'Subject Group'),
 			'name' => Yii::t('app', 'Name'),
 			'description' => Yii::t('app', 'Description'),
-			'subjects' => null,
 		);
 	}
 
